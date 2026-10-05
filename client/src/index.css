@@ -1,69 +1,107 @@
-body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
-  background: #f4f6f8;
-  color: #1a1a1a;
+.results {
+  margin-top: 1rem;
 }
 
-.container {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
-.status {
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.form-wrapper label {
-  display: block;
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-
-.form-wrapper input,
-.form-wrapper select {
-  display: block;
-  width: 100%;
-  margin-top: 0.35rem;
-  padding: 0.6rem;
-  font-size: 1rem;
-  border: 1px solid #c5ccd3;
-  border-radius: 6px;
-  box-sizing: border-box;
-}
-
-button {
-  padding: 0.8rem 1.4rem;
-  font-size: 1rem;
-  font-weight: 600;
+.risk-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-radius: 10px;
   color: #fff;
-  background: #0b5fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+  margin-bottom: 1.5rem;
 }
-
-button:disabled {
-  background: #9db4e6;
-  cursor: not-allowed;
+.risk-banner h2 {
+  margin: 0;
+  font-size: 2rem;
 }
-
-.hint {
+.risk-label {
+  margin: 0;
   font-size: 0.85rem;
-  color: #666;
+  opacity: 0.9;
+}
+.risk-score {
+  margin: 0;
+  font-weight: 600;
+}
+.risk-low {
+  background: #1b7f4b;
+}
+.risk-medium {
+  background: #b7791f;
+}
+.risk-high {
+  background: #c25b12;
+}
+.risk-critical {
+  background: #b00020;
+}
+.risk-unknown {
+  background: #555;
 }
 
-.error {
-  color: #b00020;
+.card {
+  background: #fff;
+  border: 1px solid #dde3e8;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+.card h3 {
+  margin: 0 0 0.5rem;
+}
+.card p {
+  margin: 0.4rem 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  margin-left: 0.6rem;
+  vertical-align: middle;
+}
+.badge-high {
+  background: #c25b12;
+}
+.badge-medium {
+  background: #b7791f;
+}
+.badge-low {
+  background: #1b7f4b;
+}
+
+.plan li {
+  margin-bottom: 0.9rem;
+}
+.timeframe {
+  font-size: 0.8rem;
+  color: #555;
   font-weight: 600;
 }
 
-.result pre {
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+.btn-secondary {
   background: #fff;
-  padding: 1rem;
-  border-radius: 6px;
-  overflow-x: auto;
-  white-space: pre-wrap;
+  color: #0b5fff;
+  border: 1px solid #0b5fff;
+}
+.disclaimer {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 1.5rem;
+}
+
+@media print {
+  .actions {
+    display: none;
+  }
 }

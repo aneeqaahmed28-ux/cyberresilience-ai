@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { questions, sectors, sizes } from "../data/questions";
+import ResultsView from "./ResultsView";
 
 const API_URL = "http://localhost:5001/api/assess";
 
@@ -59,6 +60,15 @@ function AssessmentForm() {
       setLoading(false);
     }
   };
+  if (result) {
+    return (
+      <ResultsView
+        result={result}
+        organisationName={organisation.name}
+        onReset={() => setResult(null)}
+      />
+    );
+  }
 
   return (
     <div className="form-wrapper">
@@ -128,13 +138,6 @@ function AssessmentForm() {
       )}
 
       {error && <p className="error">{error}</p>}
-
-      {result && (
-        <div className="result">
-          <h2>Response from backend</h2>
-          <pre>{JSON.stringify(result, null, 2)}</pre>
-        </div>
-      )}
     </div>
   );
 }
