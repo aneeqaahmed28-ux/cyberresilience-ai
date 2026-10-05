@@ -2,7 +2,11 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { askModel } from "./aiClient.js";
-import { buildMessages, parseModelJson } from "./assessment.js";
+import {
+  buildMessages,
+  parseModelJson,
+  scoreAssessment,
+} from "./assessment.js";
 
 dotenv.config();
 
@@ -17,23 +21,44 @@ app.get("/api/health", (req, res) => {
 app.post("/api/assess", async (req, res) => {
   const { organisation, answers } = req.body;
 
-  if (!organisation || !Array.isArray(answers) || answers.length === 0) {
-    return res.status(400).json({ error: "Missing organisation or answers." });
+  const valid =
+    organisation &&
+    Array.isArray(answers) &&
+    answers.length > 0 &&
+    answers.every(
+      (a) =>
+        a.question &&
+        a.answer &&
+        Number.isInteger(a.score) &&
+        a.score >= 0 &&
+        a.score <= 3,
+    );
+
+  if (!valid) {
+    return res
+      .status(400)
+      .json({ error: "Missing or invalid organisation or answers." });
   }
 
+  const overall = scoreAssessment(answers);
+
   try {
-    const raw = await askModel(buildMessages(organisation, answers), {
+    const raw = await askModel(buildMessages(organisation, answers, overall), {
       maxTokens: 6000,
     });
 
     try {
       const assessment = parseModelJson(raw);
+      assessment.riskLevel = overall.riskLevel;
+      assessment.score = { total: overall.total, max: overall.max };
       return res.json(assessment);
     } catch (parseErr) {
       console.error("Could not parse model output:\n", raw);
-      return res.status(502).json({
-        error: "The AI returned an unexpected format. Please try again.",
-      });
+      return res
+        .status(502)
+        .json({
+          error: "The AI returned an unexpected format. Please try again.",
+        });
     }
   } catch (err) {
     console.error(err.message);

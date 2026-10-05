@@ -38,6 +38,7 @@ function AssessmentForm() {
           answers: questions.map((q) => ({
             question: q.label,
             answer: answers[q.id],
+            score: q.options.indexOf(answers[q.id]),
           })),
         }),
       });
@@ -49,7 +50,11 @@ function AssessmentForm() {
       const data = await response.json();
       setResult(data);
     } catch (err) {
-      setError(err.message || "Something went wrong.");
+      setError(
+        err.message === "Failed to fetch"
+          ? "Could not reach the server. Please check it is running and try again."
+          : err.message || "Something went wrong.",
+      );
     } finally {
       setLoading(false);
     }

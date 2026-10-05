@@ -1,15 +1,22 @@
+const RATINGS = ["Strong", "Acceptable", "Weak", "Very weak"];
+
 const SYSTEM_PROMPT = `You are a cyber resilience advisor for small and medium organisations in the UK.
-You receive an organisation profile and its answers to a short questionnaire.
+You receive an organisation profile, an overall risk level, and its questionnaire answers.
+Each answer has already been rated: Strong, Acceptable, Weak or Very weak.
 
 Rules:
 - Base your analysis ONLY on the answers given. Do not invent facts about the organisation.
+- Only list an answer under "strengths" if it is rated Strong.
+- Create one gap for every answer rated Weak or Very weak. Severity: Very weak = High, Weak = Medium.
+- Acceptable answers may become a Low severity gap only if there is a useful improvement.
+- Your summary must be consistent with the overall risk level you are given. Do not contradict it.
+- Order gaps from highest to lowest severity. The action plan should follow the same order.
 - Be practical and specific. Avoid jargon, or explain it briefly.
 - Do not claim the organisation is compliant or certified with any standard.
 - Respond with ONLY valid JSON. No markdown, no code fences, no text before or after.
 
 Use exactly this JSON shape:
 {
-  "riskLevel": "Low" | "Medium" | "High" | "Critical",
   "summary": "2-3 sentence overview",
   "strengths": ["short strength", "..."],
   "gaps": [
@@ -29,14 +36,28 @@ Use exactly this JSON shape:
   ]
 }`;
 
-export function buildMessages(organisation, answers) {
+export function scoreAssessment(answers) {
+  const total = answers.reduce((sum, a) => sum + a.score, 0);
+  let riskLevel = "Low";
+  if (total >= 16) riskLevel = "Critical";
+  else if (total >= 10) riskLevel = "High";
+  else if (total >= 5) riskLevel = "Medium";
+  return { total, max: answers.length * 3, riskLevel };
+}
+
+export function buildMessages(organisation, answers, overall) {
   const answerLines = answers
-    .map((a, i) => `${i + 1}. ${a.question}\n   Answer: ${a.answer}`)
+    .map(
+      (a, i) =>
+        `${i + 1}. ${a.question}\n   Answer: ${a.answer}\n   Rating: ${RATINGS[a.score]}`,
+    )
     .join("\n");
 
   const userPrompt = `Organisation: ${organisation.name || "Unnamed"}
 Sector: ${organisation.sector}
 Size: ${organisation.size}
+
+Overall risk level: ${overall.riskLevel}
 
 Questionnaire answers:
 ${answerLines}
