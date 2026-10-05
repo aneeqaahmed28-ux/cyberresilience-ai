@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
+import AssessmentForm from "./components/AssessmentForm";
 
 function App() {
-  const [message, setMessage] = useState("Checking backend...");
+  const [backendStatus, setBackendStatus] = useState("Checking backend...");
 
   useEffect(() => {
     fetch("http://localhost:5001/api/health")
       .then((res) => res.json())
-      .then((data) => setMessage(data.message))
-      .catch(() => setMessage("Backend not reachable ❌"));
+      .then((data) => setBackendStatus(data.message))
+      .catch(() => setBackendStatus("Backend not reachable ❌"));
   }, []);
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+    <div className="container">
       <h1>CyberResilience AI</h1>
-      <p>{message}</p>
+      <p className="status">{backendStatus}</p>
+      <AssessmentForm />
     </div>
   );
 }
