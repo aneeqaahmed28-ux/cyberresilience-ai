@@ -25,7 +25,7 @@
 - Redeem the $25 hackathon credit (form on the Devpost Resources tab) + Builders Program
 - Deploy, README, demo video, Devpost form, feedback section
 
-##October 6 -  Results so far (model: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B on Nebius Token Factory)
+## October 6 -  Results so far (model: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B on Nebius Token Factory)
 
 | Test | Thinking | Level | Score | Seconds | Completion tokens |
 |---|---|---|---|---|---|
