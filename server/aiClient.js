@@ -18,6 +18,7 @@ export async function askModel(
     body.chat_template_kwargs = { enable_thinking: false };
   }
 
+  const startTime = Date.now();
   const res = await fetch(`${base}/chat/completions`, {
     method: "POST",
     headers: {
@@ -37,6 +38,8 @@ export async function askModel(
   console.log(
     "finish_reason:",
     choice?.finish_reason,
+    "| seconds:",
+    ((Date.now() - startTime) / 1000).toFixed(1),
     "| usage:",
     JSON.stringify(data.usage),
   );

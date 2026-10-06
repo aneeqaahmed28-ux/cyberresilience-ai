@@ -2,7 +2,8 @@ import { useState } from "react";
 import { questions, sectors, sizes } from "../data/questions";
 import ResultsView from "./ResultsView";
 
-const API_URL = "http://localhost:5001/api/assess";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5001";
+const API_URL = `${API_BASE}/api/assess`;
 
 function AssessmentForm() {
   const [organisation, setOrganisation] = useState({

@@ -1,3 +1,65 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #f4f6f8;
+  color: #1a1a1a;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.status {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.form-wrapper label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.form-wrapper input,
+.form-wrapper select {
+  display: block;
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #c5ccd3;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0.8rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: #0b5fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #9db4e6;
+  cursor: not-allowed;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.error {
+  color: #b00020;
+  font-weight: 600;
+}
+
 .results {
   margin-top: 1rem;
 }
