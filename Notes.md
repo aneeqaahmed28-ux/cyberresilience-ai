@@ -72,3 +72,4 @@
 
 ## More feedback for Nebius / platforms
 - Vercel detected two apps in the repo and defaulted to "Services"; I had to choose "Import single project" and root `client`
+- Promo credit email says credits must be applied before 31 Dec 2026 and then do not expire
