@@ -59,3 +59,16 @@
 
 ## Still to do
 - Quality comparison, deployment, README, demo video, Devpost form, feedback section
+
+
+## October 7 - Deployment
+- Backend: Express on Render (free plan), root directory `server`, start command `npm start`
+- Frontend: React (Vite) on Vercel (free Hobby plan), root directory `client`
+- Secrets (Nebius key, model name) are set as Render environment variables, never in the repo
+- Safeguards live: rate limit (20/hour per visitor), daily cap (200), CORS allow-list, input validation
+- Live test: assessment works end to end on desktop and phone
+- Response time on the live app: roughly 10-15 s (estimate, not measured), similar to local
+- Cold start after idle: not yet measured (Render free services spin down after about 15 min of inactivity)
+
+## More feedback for Nebius / platforms
+- Vercel detected two apps in the repo and defaulted to "Services"; I had to choose "Import single project" and root `client`
