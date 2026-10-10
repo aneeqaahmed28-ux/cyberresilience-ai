@@ -73,3 +73,24 @@
 ## More feedback for Nebius / platforms
 - Vercel detected two apps in the repo and defaulted to "Services"; I had to choose "Import single project" and root `client`
 - Promo credit email says credits must be applied before 31 Dec 2026 and then do not expire
+
+
+## The four saved outputs
+
+Expected: 5 gaps (incident plan, suppliers, training, access, downtime), sorted High first.
+
+Output	Setting	Gaps	Downtime gap?	Sorted by severity?	Summary
+OFF (earlier)	off	4	No	No (H, M, M, H)	Leaves out downtime
+Test 3	off	4	No	No (H, M, M, H)	Names only 2 of the 4 gaps
+ON (earlier)	on	5	Yes	Yes (H, H, M, M, M)	Covers all of them
+Test 4	on	5	Yes	Yes (H, H, M, M, M)	Mentions most; drops access and downtime
+
+Thinking off dropped the downtime gap and ignored the sorting rule both times. Thinking on included all five gaps and sorted them correctly both times. That’s two outputs per setting, so it’s a consistent pattern in a small sample, not proof.
+
+Test 3’s summary is also weaker: it mentions only incident planning and suppliers, though it lists four gaps.
+
+
+## Tokens and time (confirmed runs only)
+Setting	Output tokens	Seconds
+On (4 runs)	1,739 / 2,011 / 1,556 / 1,577	7.9 / 14.8 / 10.5 / 30.6
+Off (3 runs)	720 / 514 / 568	3.5 / 13.6 / 3.0
