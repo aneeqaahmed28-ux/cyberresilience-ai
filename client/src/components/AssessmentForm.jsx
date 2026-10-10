@@ -131,7 +131,9 @@ function AssessmentForm() {
       ))}
 
       <button onClick={handleSubmit} disabled={!allAnswered || loading}>
-        {loading ? "Analysing..." : "Analyse My Resilience"}
+        {loading
+          ? "Analysing... this can take up to a minute"
+          : "Analyse My Resilience"}
       </button>
 
       {!allAnswered && (
