@@ -94,3 +94,6 @@ Test 3’s summary is also weaker: it mentions only incident planning and suppli
 Setting	Output tokens	Seconds
 On (4 runs)	1,739 / 2,011 / 1,556 / 1,577	7.9 / 14.8 / 10.5 / 30.6
 Off (3 runs)	720 / 514 / 568	3.5 / 13.6 / 3.0
+
+
+## “model adds details not in the answers”
