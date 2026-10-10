@@ -34,8 +34,7 @@ Express API → React results page
 
 - Platform: Nebius Token Factory (OpenAI-compatible chat completions API)
 - Model: `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`
-- Reasoning can be switched off with `chat_template_kwargs: { enable_thinking: false }`. In my tests on identical answers this was faster and used fewer output tokens. See the testing notes for the figures.
-
+- Reasoning can be switched off with chat_template_kwargs: { enable_thinking: false }. In my tests (seven runs on near-identical answers) it produced roughly a third of the output tokens (about 500-700 against 1,550-2,000). In the four outputs I saved and compared, thinking off omitted one required gap and did not sort gaps by severity both times, while thinking on included all five gaps, sorted correctly, both times. That is a small sample, so the app runs with thinking on
 ## Tech stack
 
 React (Vite), Node.js, Express, Nebius Token Factory, NVIDIA Nemotron. Hosted on Vercel and Render.
@@ -95,3 +94,4 @@ Tested with fictional organisations only. See `Notes.md` for the results, proble
 ## Licence
 
 MIT
+
