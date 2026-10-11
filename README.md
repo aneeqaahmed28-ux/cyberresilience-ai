@@ -35,6 +35,17 @@ Express API → React results page
 - Platform: Nebius Token Factory (OpenAI-compatible chat completions API)
 - Model: `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`
 - Reasoning can be switched off with chat_template_kwargs: { enable_thinking: false }. In my tests (seven runs on near-identical answers) it produced roughly a third of the output tokens (about 500-700 against 1,550-2,000). In the four outputs I saved and compared, thinking off omitted one required gap and did not sort gaps by severity both times, while thinking on included all five gaps, sorted correctly, both times. That is a small sample, so the app runs with thinking on
+
+## How Nemotron and Token Factory are used
+
+- **Model:** `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`, called through the Nebius Token Factory chat completions API. Every assessment makes one runtime call from the Express backend.
+- **What the model does:** it writes the summary, strengths, gaps, recommendations and action plan. The risk level is calculated by code, not by the model.
+- **Where Token Factory helped:** its OpenAI-compatible API meant the integration is a single HTTP call, with no GPUs or model hosting to manage. Pricing is per token, and all of my testing cost about one cent (Billing > Usage showed roughly 0.02M input and 0.04M output tokens on 11 October 2026).
+- **Reasoning:** Nemotron Nano reasons before answering. I compared it on and off (see Models and platform above) and run it with reasoning on.
+- **Other Nebius services:** none. I did not use AI Cloud, Serverless Endpoints or Serverless Jobs. The frontend is hosted on Vercel and the backend on Render.
+- **Built during the submission period:** this project was created from scratch in October 2026.
+
+  
 ## Tech stack
 
 React (Vite), Node.js, Express, Nebius Token Factory, NVIDIA Nemotron. Hosted on Vercel and Render.
